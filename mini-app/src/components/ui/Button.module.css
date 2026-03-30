@@ -1,0 +1,81 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Variants */
+.primary {
+  background: var(--gradient-green);
+  color: #fff;
+  box-shadow: var(--shadow-green);
+}
+
+.primary:active {
+  box-shadow: 0 2px 10px rgba(45, 188, 59, 0.15);
+}
+
+.secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.secondary:active {
+  background: var(--bg-card-hover);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.ghost:active {
+  background: var(--bg-card);
+}
+
+.outline {
+  background: transparent;
+  color: var(--accent-green);
+  border: 1.5px solid var(--accent-green);
+}
+
+.outline:active {
+  background: var(--accent-green-light);
+}
+
+/* Sizes */
+.sm {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.md {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+.lg {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.fullWidth {
+  width: 100%;
+}

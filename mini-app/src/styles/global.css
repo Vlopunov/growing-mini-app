@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Background */
+  --bg-primary: #02091a;
+  --bg-secondary: #0a1628;
+  --bg-card: #111d33;
+  --bg-card-hover: #162040;
+  --bg-elevated: #1a2744;
+  --bg-input: #0d1a2e;
+
+  /* Accent */
+  --accent-green: #2dbc3b;
+  --accent-green-hover: #25a832;
+  --accent-green-light: rgba(45, 188, 59, 0.12);
+  --accent-green-glow: rgba(45, 188, 59, 0.3);
+  --accent-blue: #0039c7;
+  --accent-blue-light: rgba(0, 57, 199, 0.12);
+  --accent-red: #e53e3e;
+  --accent-red-light: rgba(229, 62, 62, 0.12);
+  --accent-orange: #f6993f;
+  --accent-orange-light: rgba(246, 153, 63, 0.12);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #8899aa;
+  --text-muted: #556677;
+  --text-accent: #2dbc3b;
+
+  /* Border */
+  --border: #1a2744;
+  --border-light: rgba(255, 255, 255, 0.06);
+
+  /* Gradients */
+  --gradient-green: linear-gradient(135deg, #2dbc3b 0%, #1a9e2a 100%);
+  --gradient-green-soft: linear-gradient(135deg, rgba(45, 188, 59, 0.2) 0%, rgba(26, 158, 42, 0.05) 100%);
+  --gradient-card: linear-gradient(180deg, #111d33 0%, #0a1628 100%);
+  --gradient-hero: linear-gradient(135deg, #02091a 0%, #0a1628 50%, #021a0a 100%);
+  --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(2, 9, 26, 0.9) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-green: 0 4px 20px rgba(45, 188, 59, 0.25);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 40px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Tab Bar */
+  --tab-bar-height: 72px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.display-font {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  background: transparent;
+}
+
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardSwipeLeft {
+  to {
+    transform: translateX(-150%) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes cardSwipeRight {
+  to {
+    transform: translateX(150%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes matchPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}

@@ -1,0 +1,65 @@
+.tabBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(2, 9, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-light);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: var(--tab-bar-height);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  min-width: 56px;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.tab.active {
+  color: var(--accent-green);
+}
+
+.iconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.activeGlow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--accent-green-light);
+  animation: scaleIn 0.3s ease forwards;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
