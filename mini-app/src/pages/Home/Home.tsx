@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Heart, BookOpen, User, Gift, ArrowRight, TrendingUp, Users, Mic, Sparkles } from 'lucide-react';
+import { Calendar, Heart, BookOpen, Gift, ArrowRight, TrendingUp, Users, Mic, Sparkles } from 'lucide-react';
 import { EventCard } from '../../components/EventCard/EventCard';
 import { Button } from '../../components/ui/Button';
 import { events, news, communityStats } from '../../data/mock';
