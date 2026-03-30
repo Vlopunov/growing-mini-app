@@ -416,7 +416,7 @@ export const EditProfile: React.FC = () => {
               {firstName || 'Имя'} {lastName || 'Фамилия'}
             </h2>
             <p className={styles.previewRole}>
-              {displayRole || 'Должность'} {company ? `@ ${company}` : ''}
+              {displayRole || 'Должность'}{company ? `, ${company}` : ''}
             </p>
 
             {industry && (
