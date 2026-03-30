@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { PersonCard } from '../../components/PersonCard/PersonCard';
 import { people } from '../../data/mock';
@@ -14,6 +15,7 @@ const categories: { key: Category; label: string }[] = [
 ];
 
 export const Catalog: React.FC = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<Category>('all');
 
@@ -75,7 +77,7 @@ export const Catalog: React.FC = () => {
       <div className={styles.list}>
         {filtered.map((person, i) => (
           <div key={person.id} style={{ animationDelay: `${i * 0.05}s` }}>
-            <PersonCard person={person} />
+            <PersonCard person={person} onClick={() => navigate(`/member/${person.id}`)} />
           </div>
         ))}
         {filtered.length === 0 && (

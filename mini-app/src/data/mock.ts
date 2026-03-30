@@ -32,19 +32,33 @@ export interface ScheduleItem {
   speaker?: string;
 }
 
+export interface Achievement {
+  id: string;
+  icon: string;
+  label: string;
+  unlocked: boolean;
+}
+
 export interface Person {
   id: string;
   name: string;
   role: string;
   company: string;
   avatar: string;
+  coverPhoto?: string;
   bio: string;
   interests: string[];
+  skills: string[];
+  industry: string;
   telegram?: string;
   linkedin?: string;
   website?: string;
   category: 'speaker' | 'participant' | 'company';
   eventsAttended: number;
+  memberSince: string;
+  verified: boolean;
+  achievements: Achievement[];
+  contactsHidden: boolean;
 }
 
 export interface NewsItem {
@@ -173,6 +187,23 @@ export const events: Event[] = [
   },
 ];
 
+const defaultAchievements: Achievement[] = [
+  { id: 'a1', icon: '📅', label: 'Первое событие', unlocked: true },
+  { id: 'a2', icon: '🤝', label: 'Первый контакт', unlocked: true },
+  { id: 'a3', icon: '🔗', label: 'Профиль заполнен', unlocked: true },
+  { id: 'a4', icon: '🌐', label: 'Нетворкер', unlocked: true },
+  { id: 'a5', icon: '🔥', label: '5 событий', unlocked: false },
+  { id: 'a6', icon: '✅', label: '10 контактов', unlocked: false },
+  { id: 'a7', icon: '⭐', label: 'VIP участник', unlocked: false },
+  { id: 'a8', icon: '🎤', label: 'Спикер', unlocked: false },
+  { id: 'a9', icon: '💎', label: 'Амбассадор', unlocked: false },
+  { id: 'a10', icon: '🏆', label: 'Легенда', unlocked: false },
+];
+
+function makeAchievements(unlockedCount: number): Achievement[] {
+  return defaultAchievements.map((a, i) => ({ ...a, unlocked: i < unlockedCount }));
+}
+
 export const people: Person[] = [
   {
     id: 'p1',
@@ -180,11 +211,18 @@ export const people: Person[] = [
     role: 'Руководитель',
     company: 'pickme.agency',
     avatar: 'https://i.pravatar.cc/150?img=12',
+    coverPhoto: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop',
     bio: 'Руководитель маркетингового агентства. Специализируюсь на performance-маркетинге и growth hacking.',
     interests: ['Маркетинг', 'Growth', 'Digital'],
+    skills: ['Performance', 'Таргетинг', 'Growth Hacking', 'SMM', 'Аналитика'],
+    industry: 'Маркетинг / Реклама',
     telegram: '@kirill_s',
     category: 'participant',
     eventsAttended: 8,
+    memberSince: 'январь 2025',
+    verified: false,
+    achievements: makeAchievements(5),
+    contactsHidden: true,
   },
   {
     id: 'p2',
@@ -192,12 +230,19 @@ export const people: Person[] = [
     role: 'Бизнес-стратег',
     company: 'Scale Consulting',
     avatar: 'https://i.pravatar.cc/150?img=1',
+    coverPhoto: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=400&fit=crop',
     bio: 'Помогаю бизнесам масштабироваться системно. 15+ лет опыта в стратегическом консалтинге.',
     interests: ['Стратегия', 'Масштабирование', 'Менеджмент'],
+    skills: ['Стратегия', 'Консалтинг', 'M&A', 'Масштабирование', 'Лидерство', 'OKR'],
+    industry: 'Консалтинг / Стратегия',
     telegram: '@nastya_bel',
     linkedin: 'anastasia-belochkina',
     category: 'speaker',
     eventsAttended: 12,
+    memberSince: 'март 2024',
+    verified: true,
+    achievements: makeAchievements(8),
+    contactsHidden: false,
   },
   {
     id: 'p3',
@@ -205,12 +250,19 @@ export const people: Person[] = [
     role: 'CEO',
     company: 'TechVentures',
     avatar: 'https://i.pravatar.cc/150?img=3',
+    coverPhoto: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=400&fit=crop',
     bio: 'Строю технологические компании. Инвестирую в AI-стартапы.',
     interests: ['AI', 'Стартапы', 'Инвестиции'],
+    skills: ['AI/ML', 'Венчур', 'Стратегия', 'Product', 'Управление'],
+    industry: 'IT / Технологии',
     linkedin: 'dmitry-kozlov',
     website: 'techventures.by',
     category: 'speaker',
     eventsAttended: 6,
+    memberSince: 'июнь 2024',
+    verified: true,
+    achievements: makeAchievements(7),
+    contactsHidden: false,
   },
   {
     id: 'p4',
@@ -218,11 +270,18 @@ export const people: Person[] = [
     role: 'Основатель',
     company: 'DigitalBridge',
     avatar: 'https://i.pravatar.cc/150?img=5',
+    coverPhoto: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop',
     bio: 'Помогаю малому бизнесу перейти в цифру. Запустила 50+ проектов цифровой трансформации.',
     interests: ['Digital', 'Трансформация', 'SMB'],
+    skills: ['Digital', 'CRM', 'Автоматизация', 'UX', 'Аналитика'],
+    industry: 'Digital / Трансформация',
     telegram: '@maria_sok',
     category: 'speaker',
     eventsAttended: 4,
+    memberSince: 'сентябрь 2025',
+    verified: true,
+    achievements: makeAchievements(6),
+    contactsHidden: false,
   },
   {
     id: 'p5',
@@ -230,10 +289,17 @@ export const people: Person[] = [
     role: 'Инвестор',
     company: 'StartFund',
     avatar: 'https://i.pravatar.cc/150?img=8',
+    coverPhoto: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop',
     bio: 'Управляющий партнер венчурного фонда. Портфель: 30+ компаний в СНГ.',
     interests: ['Инвестиции', 'Стартапы', 'Финтех'],
+    skills: ['Венчур', 'Due Diligence', 'Финансы', 'M&A', 'Стартапы'],
+    industry: 'Инвестиции / Финансы',
     category: 'speaker',
     eventsAttended: 5,
+    memberSince: 'февраль 2025',
+    verified: true,
+    achievements: makeAchievements(6),
+    contactsHidden: true,
   },
   {
     id: 'p6',
@@ -241,11 +307,18 @@ export const people: Person[] = [
     role: 'HR-директор',
     company: 'PeopleFirst',
     avatar: 'https://i.pravatar.cc/150?img=9',
+    coverPhoto: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=400&fit=crop',
     bio: 'Создаю корпоративные культуры, которые привлекают лучших. 10+ лет в HR-консалтинге.',
     interests: ['HR', 'Культура', 'Лидерство'],
+    skills: ['HR', 'Рекрутинг', 'Корп. культура', 'Обучение', 'Лидерство'],
+    industry: 'HR / Консалтинг',
     telegram: '@elena_vl',
     category: 'speaker',
     eventsAttended: 3,
+    memberSince: 'декабрь 2025',
+    verified: false,
+    achievements: makeAchievements(4),
+    contactsHidden: false,
   },
   {
     id: 'p7',
@@ -253,10 +326,17 @@ export const people: Person[] = [
     role: 'Директор по развитию',
     company: 'SmartLogistics',
     avatar: 'https://i.pravatar.cc/150?img=15',
+    coverPhoto: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=400&fit=crop',
     bio: 'Развиваю логистические решения для e-commerce. Оптимизирую цепочки поставок.',
     interests: ['Логистика', 'E-commerce', 'Оптимизация'],
+    skills: ['Логистика', 'Supply Chain', 'E-com', 'ERP', 'Оптимизация'],
+    industry: 'Логистика / E-commerce',
     category: 'participant',
     eventsAttended: 5,
+    memberSince: 'октябрь 2025',
+    verified: false,
+    achievements: makeAchievements(4),
+    contactsHidden: true,
   },
   {
     id: 'p8',
@@ -264,11 +344,18 @@ export const people: Person[] = [
     role: 'Основатель',
     company: 'Favorit Catering',
     avatar: 'https://i.pravatar.cc/150?img=20',
+    coverPhoto: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=400&fit=crop',
     bio: 'Создаю гастрономические впечатления для бизнес-мероприятий. Кейтеринг премиум-класса.',
     interests: ['HoReCa', 'Event', 'B2B'],
+    skills: ['Кейтеринг', 'Event', 'Управление', 'B2B продажи', 'Сервис'],
+    industry: 'HoReCa / Event',
     telegram: '@marina_fav',
     category: 'participant',
     eventsAttended: 10,
+    memberSince: 'март 2024',
+    verified: true,
+    achievements: makeAchievements(7),
+    contactsHidden: false,
   },
   {
     id: 'p9',
@@ -276,10 +363,17 @@ export const people: Person[] = [
     role: 'Менеджер проектов',
     company: 'Anomalia Team',
     avatar: 'https://i.pravatar.cc/150?img=25',
+    coverPhoto: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=400&fit=crop',
     bio: 'Организую мероприятия и управляю креативными проектами. Anomalia Talks — мой главный проект.',
     interests: ['Event', 'Креатив', 'Коммуникации'],
+    skills: ['Project Mgmt', 'Event', 'Креатив', 'PR', 'Коммуникации'],
+    industry: 'Event / Креатив',
     category: 'participant',
     eventsAttended: 7,
+    memberSince: 'июль 2024',
+    verified: false,
+    achievements: makeAchievements(5),
+    contactsHidden: true,
   },
   {
     id: 'p10',
@@ -287,11 +381,18 @@ export const people: Person[] = [
     role: 'CTO',
     company: 'CloudSys',
     avatar: 'https://i.pravatar.cc/150?img=30',
+    coverPhoto: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
     bio: 'Архитектор облачных решений. Помогаю компаниям мигрировать в облако.',
     interests: ['Cloud', 'DevOps', 'Технологии'],
+    skills: ['AWS', 'DevOps', 'Kubernetes', 'Архитектура', 'Node.js'],
+    industry: 'IT / Разработка',
     telegram: '@nikita_gr',
     category: 'participant',
     eventsAttended: 4,
+    memberSince: 'январь 2026',
+    verified: false,
+    achievements: makeAchievements(3),
+    contactsHidden: true,
   },
   {
     id: 'p11',
@@ -299,10 +400,17 @@ export const people: Person[] = [
     role: 'Финансовый консультант',
     company: 'FinGrowth',
     avatar: 'https://i.pravatar.cc/150?img=32',
+    coverPhoto: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop',
     bio: 'Помогаю бизнесам структурировать финансы и привлекать инвестиции.',
     interests: ['Финансы', 'Инвестиции', 'Консалтинг'],
+    skills: ['Финмодели', 'Инвестиции', 'Бюджет', 'Аудит', 'Налоги'],
+    industry: 'Финансы / Консалтинг',
     category: 'participant',
     eventsAttended: 6,
+    memberSince: 'ноябрь 2024',
+    verified: false,
+    achievements: makeAchievements(5),
+    contactsHidden: true,
   },
   {
     id: 'p12',
@@ -310,11 +418,18 @@ export const people: Person[] = [
     role: 'Основатель',
     company: 'EduTech Lab',
     avatar: 'https://i.pravatar.cc/150?img=33',
+    coverPhoto: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=400&fit=crop',
     bio: 'Создаю EdTech-продукты для корпоративного обучения. Выпустил 20+ онлайн-курсов.',
     interests: ['EdTech', 'Обучение', 'Продукт'],
+    skills: ['EdTech', 'LMS', 'Курсы', 'Product', 'UX'],
+    industry: 'EdTech / Образование',
     telegram: '@pavel_zh',
     category: 'participant',
     eventsAttended: 9,
+    memberSince: 'май 2024',
+    verified: true,
+    achievements: makeAchievements(6),
+    contactsHidden: false,
   },
 ];
 

@@ -7,6 +7,7 @@ import { EventDetail } from './pages/Events/EventDetail';
 import { BusinessTinder } from './pages/BusinessTinder/BusinessTinder';
 import { Catalog } from './pages/Catalog/Catalog';
 import { Profile } from './pages/Profile/Profile';
+import { MemberProfile } from './pages/MemberProfile/MemberProfile';
 import { useTelegram } from './hooks/useTelegram';
 
 function TelegramInit() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/tinder" element={<BusinessTinder />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/member/:id" element={<MemberProfile />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>

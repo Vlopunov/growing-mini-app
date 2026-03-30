@@ -1,0 +1,374 @@
+.page {
+  min-height: 100%;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 16px;
+  color: var(--text-muted);
+}
+
+/* Cover Section */
+.coverSection {
+  position: relative;
+  height: 300px;
+}
+
+.coverWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.coverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverFallback {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-hero);
+}
+
+.coverOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 9, 26, 0.2) 0%,
+    rgba(2, 9, 26, 0.4) 40%,
+    rgba(2, 9, 26, 0.95) 85%,
+    rgba(2, 9, 26, 1) 100%
+  );
+}
+
+.backBtn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 5;
+  transition: background var(--transition-fast);
+}
+
+.backBtn:active {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.shareBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 5;
+}
+
+/* Name Overlay */
+.nameOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 16px 16px;
+  z-index: 3;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.name {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.verifiedBadge {
+  color: #4da6ff;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.roleRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.dot {
+  margin: 0 1px;
+  opacity: 0.5;
+}
+
+/* Status Bar */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.eventsCount {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Sections */
+.section {
+  padding: 8px 16px;
+}
+
+/* Industry Tag */
+.industryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: var(--accent-green-light);
+  color: var(--accent-green);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Card */
+.card {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+}
+
+.cardLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.cardLabelIcon {
+  font-size: 13px;
+}
+
+.bioText {
+  font-size: 15px;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+
+/* Skills */
+.skillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillTag {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  transition: all var(--transition-fast);
+}
+
+/* Achievements */
+.achievementsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.achievementsCount {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.achievementsGrid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.achievementItem {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.achievementItem:active {
+  transform: scale(0.9);
+}
+
+.achievementUnlocked {
+  background: linear-gradient(135deg, rgba(45, 188, 59, 0.15), rgba(45, 188, 59, 0.05));
+  border: 1.5px solid rgba(45, 188, 59, 0.3);
+  box-shadow: 0 0 12px rgba(45, 188, 59, 0.1);
+}
+
+.achievementLocked {
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-light);
+  opacity: 0.4;
+}
+
+.achievementIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Contacts */
+.contactsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+.contactIcon {
+  color: var(--text-muted);
+}
+
+.contactsHidden {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lockIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.lockText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lockTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lockSubtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Like Button */
+.likeSection {
+  padding: 12px 16px;
+}
+
+.likeButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 32px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #e74c8b 0%, #ff6b9d 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(231, 76, 139, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.likeButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 10px rgba(231, 76, 139, 0.2);
+}
+
+.likedBanner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(231, 76, 139, 0.12);
+  color: #e74c8b;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid rgba(231, 76, 139, 0.25);
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Member Since */
+.memberSince {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 12px 16px 0;
+}
