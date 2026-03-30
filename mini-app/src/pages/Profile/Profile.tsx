@@ -8,20 +8,22 @@ import { Avatar } from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { events, people } from '../../data/mock';
+import { useTelegram } from '../../hooks/useTelegram';
 import styles from './Profile.module.css';
 
 export const Profile: React.FC = () => {
   const navigate = useNavigate();
+  const { user: tgUser, sendData, haptic, close, isAvailable } = useTelegram();
   const [isEditing, setIsEditing] = useState(false);
 
-  // Mock user data (as if from Telegram)
+  // Use Telegram user data if available, fallback to mock
   const user = {
-    name: 'Владислав Лопунов',
-    avatar: 'https://i.pravatar.cc/150?img=53',
+    name: tgUser?.first_name ? `${tgUser.first_name}${tgUser.last_name ? ' ' + tgUser.last_name : ''}` : 'Владислав Лопунов',
+    avatar: tgUser?.photo_url || 'https://i.pravatar.cc/150?img=53',
     company: 'Growing Community',
     role: 'Участник',
     bio: 'Предприниматель. Интересуюсь технологиями, маркетингом и развитием бизнеса.',
-    telegram: '@vlad_lop',
+    telegram: tgUser?.username ? `@${tgUser.username}` : '@vlad_lop',
     eventsCount: 5,
     matchesCount: 8,
   };
@@ -86,7 +88,13 @@ export const Profile: React.FC = () => {
                 <label className={styles.fieldLabel}>О себе</label>
                 <textarea className={styles.fieldTextarea} defaultValue={user.bio} rows={3} />
               </div>
-              <Button variant="primary" size="sm" fullWidth onClick={() => setIsEditing(false)}>
+              <Button variant="primary" size="sm" fullWidth onClick={() => {
+                setIsEditing(false);
+                if (isAvailable) {
+                  haptic.notification('success');
+                  sendData({ action: 'profile_update' });
+                }
+              }}>
                 Сохранить
               </Button>
             </div>
@@ -170,9 +178,9 @@ export const Profile: React.FC = () => {
             <span>growing.by</span>
             <ChevronRight size={16} className={styles.settingArrow} />
           </div>
-          <div className={`${styles.settingItem} ${styles.settingDanger}`}>
+          <div className={`${styles.settingItem} ${styles.settingDanger}`} onClick={() => { if (isAvailable) close(); }}>
             <LogOut size={18} className={styles.settingIcon} />
-            <span>Выйти</span>
+            <span>Закрыть приложение</span>
           </div>
         </div>
       </section>

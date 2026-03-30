@@ -282,3 +282,22 @@
   color: var(--accent-green);
   letter-spacing: 0.04em;
 }
+
+.registeredBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--accent-green-light);
+  color: var(--accent-green);
+  font-weight: 600;
+  font-size: 15px;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

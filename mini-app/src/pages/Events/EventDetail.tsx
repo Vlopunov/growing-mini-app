@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Tag, Check } from 'lucide-react';
 import { Avatar } from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { events } from '../../data/mock';
+import { useTelegram } from '../../hooks/useTelegram';
 import styles from './EventDetail.module.css';
 
 export const EventDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { sendData, haptic, mainButton, backButton, isAvailable } = useTelegram();
+  const [registered, setRegistered] = useState(false);
   const event = events.find(e => e.id === id);
+
+  // Telegram Back Button
+  useEffect(() => {
+    if (isAvailable) {
+      backButton.show(() => navigate(-1));
+    }
+    return () => {
+      if (isAvailable) backButton.hide();
+    };
+  }, []);
+
+  // Telegram Main Button for registration
+  useEffect(() => {
+    if (isAvailable && event?.status === 'upcoming' && !registered) {
+      mainButton.show(`Зарегистрироваться — ${event.price}`, () => {
+        handleRegister();
+      });
+    }
+    return () => {
+      if (isAvailable) mainButton.hide();
+    };
+  }, [event, registered]);
+
+  const handleRegister = () => {
+    setRegistered(true);
+    haptic.notification('success');
+    sendData({ action: 'register_event', event_id: event?.id, event_title: event?.title });
+    if (isAvailable) mainButton.hide();
+  };
 
   if (!event) {
     return (
@@ -133,10 +165,16 @@ export const EventDetail: React.FC = () => {
             <span className={styles.priceLabel}>Стоимость</span>
             <span className={styles.priceValue}>{event.price}</span>
           </div>
-          {event.status === 'upcoming' && (
-            <Button variant="primary" size="lg" fullWidth>
+          {event.status === 'upcoming' && !registered && (
+            <Button variant="primary" size="lg" fullWidth onClick={handleRegister}>
               Зарегистрироваться
             </Button>
+          )}
+          {registered && (
+            <div className={styles.registeredBanner}>
+              <Check size={20} />
+              <span>Вы зарегистрированы!</span>
+            </div>
           )}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, Calendar, Heart, BookOpen, User } from 'lucide-react';
+import { useTelegram } from '../../hooks/useTelegram';
 import styles from './TabBar.module.css';
 
 const tabs = [
@@ -14,10 +15,16 @@ const tabs = [
 export const TabBar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { haptic, isAvailable } = useTelegram();
 
   const isActive = (path: string) => {
     if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
+  };
+
+  const handleTabClick = (path: string) => {
+    if (isAvailable) haptic.selection();
+    navigate(path);
   };
 
   return (
@@ -30,7 +37,7 @@ export const TabBar: React.FC = () => {
             <button
               key={tab.path}
               className={`${styles.tab} ${active ? styles.active : ''}`}
-              onClick={() => navigate(tab.path)}
+              onClick={() => handleTabClick(tab.path)}
             >
               <div className={styles.iconWrap}>
                 {active && <div className={styles.activeGlow} />}

@@ -3,6 +3,7 @@ import { X, Heart, MessageCircle, Users, ChevronDown } from 'lucide-react';
 import { Avatar } from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
 import { people } from '../../data/mock';
+import { useTelegram } from '../../hooks/useTelegram';
 import styles from './BusinessTinder.module.css';
 
 type View = 'swipe' | 'matches';
@@ -13,6 +14,7 @@ interface Match {
 }
 
 export const BusinessTinder: React.FC = () => {
+  const { sendData, haptic, isAvailable } = useTelegram();
   const [view, setView] = useState<View>('swipe');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDir, setSwipeDir] = useState<'left' | 'right' | null>(null);
@@ -32,10 +34,17 @@ export const BusinessTinder: React.FC = () => {
 
   const handleSwipe = useCallback((direction: 'left' | 'right') => {
     setSwipeDir(direction);
+    if (isAvailable) {
+      haptic.impact(direction === 'right' ? 'medium' : 'light');
+    }
     if (direction === 'right' && Math.random() > 0.4) {
       setTimeout(() => {
         setShowMatch(true);
         setMatches(prev => [{ person: currentPerson, timestamp: new Date() }, ...prev]);
+        if (isAvailable) {
+          haptic.notification('success');
+          sendData({ action: 'new_match', person_name: currentPerson.name, person_id: currentPerson.id });
+        }
       }, 400);
     }
     setTimeout(() => {
