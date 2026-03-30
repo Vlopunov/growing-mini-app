@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Calendar, Heart, BookOpen, User } from 'lucide-react';
+import { Home, Calendar, Heart, Gift, User } from 'lucide-react';
 import { useTelegram } from '../../hooks/useTelegram';
 import styles from './TabBar.module.css';
 
@@ -8,7 +8,7 @@ const tabs = [
   { path: '/', label: 'Главная', icon: Home },
   { path: '/events', label: 'События', icon: Calendar },
   { path: '/tinder', label: 'Тиндер', icon: Heart },
-  { path: '/catalog', label: 'Каталог', icon: BookOpen },
+  { path: '/bonuses', label: 'Бонусы', icon: Gift },
   { path: '/profile', label: 'Профиль', icon: User },
 ];
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Heart, BookOpen, User, ArrowRight, TrendingUp, Users, Mic, Sparkles } from 'lucide-react';
+import { Calendar, Heart, BookOpen, User, Gift, ArrowRight, TrendingUp, Users, Mic, Sparkles } from 'lucide-react';
 import { EventCard } from '../../components/EventCard/EventCard';
 import { Button } from '../../components/ui/Button';
 import { events, news, communityStats } from '../../data/mock';
@@ -10,8 +10,8 @@ import styles from './Home.module.css';
 const quickActions = [
   { label: 'События', icon: Calendar, path: '/events', color: 'var(--accent-green)' },
   { label: 'Нетворкинг', icon: Heart, path: '/tinder', color: '#e74c8b' },
+  { label: 'Бонусы', icon: Gift, path: '/bonuses', color: '#8b5cf6' },
   { label: 'Каталог', icon: BookOpen, path: '/catalog', color: 'var(--accent-blue)' },
-  { label: 'Профиль', icon: User, path: '/profile', color: 'var(--accent-orange)' },
 ];
 
 const statItems = [
