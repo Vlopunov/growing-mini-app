@@ -1,9 +1,12 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { X, Heart, MessageCircle, Users, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, Heart, MessageCircle, Users, ChevronDown, UserPlus } from 'lucide-react';
 import { Avatar } from '../../components/ui/Avatar';
 import { Badge } from '../../components/ui/Badge';
+import { Button } from '../../components/ui/Button';
 import { people } from '../../data/mock';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useProfile } from '../../store/profileStore';
 import styles from './BusinessTinder.module.css';
 
 type View = 'swipe' | 'matches';
@@ -14,7 +17,9 @@ interface Match {
 }
 
 export const BusinessTinder: React.FC = () => {
+  const navigate = useNavigate();
   const { sendData, haptic, isAvailable } = useTelegram();
+  const [profile] = useProfile();
   const [view, setView] = useState<View>('swipe');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDir, setSwipeDir] = useState<'left' | 'right' | null>(null);
@@ -78,6 +83,35 @@ export const BusinessTinder: React.FC = () => {
     }
     currentX.current = 0;
   };
+
+  // Gate: profile must be complete
+  if (!profile.isComplete) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Бизнес-тиндер</h1>
+          <p className={styles.subtitle}>Находите полезные контакты</p>
+        </div>
+        <div className={styles.gateCard}>
+          <div className={styles.gateIcon}><UserPlus size={40} /></div>
+          <h3 className={styles.gateTitle}>Заполните профиль</h3>
+          <p className={styles.gateText}>
+            Чтобы участвовать в бизнес-тиндере, нужно заполнить визитку.
+            Другие участники увидят ваш профиль и смогут с вами связаться.
+          </p>
+          <div className={styles.gateProgress}>
+            <div className={styles.gateProgressBar}>
+              <div className={styles.gateProgressFill} style={{ width: `${(profile.completeness / 5) * 100}%` }} />
+            </div>
+            <span className={styles.gateProgressText}>{profile.completeness}/5 полей заполнено</span>
+          </div>
+          <Button variant="primary" size="lg" fullWidth onClick={() => navigate('/edit-profile')} icon={<UserPlus size={18} />}>
+            {profile.completeness > 0 ? 'Дозаполнить профиль' : 'Создать профиль'}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.page}>

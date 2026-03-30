@@ -93,6 +93,56 @@
   color: var(--text-muted);
 }
 
+/* Completion Banner */
+.completionBanner {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(246, 153, 63, 0.08);
+  border: 1px solid rgba(246, 153, 63, 0.2);
+}
+
+.completionTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-orange);
+  margin-bottom: 8px;
+}
+
+.completionBar {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.completionFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* Profile Skills */
+.profileSkills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.profileSkillTag {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+}
+
 .statDivider {
   width: 1px;
   height: 32px;

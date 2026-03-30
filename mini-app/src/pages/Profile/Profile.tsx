@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Edit3, Calendar, Users, Settings, ChevronRight,
-  Bell, Shield, LogOut, ExternalLink, Briefcase, MessageCircle
+  Bell, Shield, LogOut, ExternalLink, Briefcase, MessageCircle, UserPlus, AlertCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '../../components/ui/Avatar';
@@ -9,21 +9,26 @@ import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { events, people } from '../../data/mock';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useProfile } from '../../store/profileStore';
 import styles from './Profile.module.css';
 
 export const Profile: React.FC = () => {
   const navigate = useNavigate();
-  const { user: tgUser, sendData, haptic, close, isAvailable } = useTelegram();
-  const [isEditing, setIsEditing] = useState(false);
+  const { user: tgUser, close, isAvailable } = useTelegram();
+  const [savedProfile] = useProfile();
 
-  // Use Telegram user data if available, fallback to mock
+  // Use saved profile data > Telegram data > fallback
   const user = {
-    name: tgUser?.first_name ? `${tgUser.first_name}${tgUser.last_name ? ' ' + tgUser.last_name : ''}` : 'Владислав Лопунов',
-    avatar: tgUser?.photo_url || 'https://i.pravatar.cc/150?img=53',
-    company: 'Growing Community',
-    role: 'Участник',
-    bio: 'Предприниматель. Интересуюсь технологиями, маркетингом и развитием бизнеса.',
-    telegram: tgUser?.username ? `@${tgUser.username}` : '@vlad_lop',
+    name: savedProfile.firstName
+      ? `${savedProfile.firstName} ${savedProfile.lastName}`
+      : tgUser?.first_name
+        ? `${tgUser.first_name}${tgUser.last_name ? ' ' + tgUser.last_name : ''}`
+        : 'Владислав Лопунов',
+    avatar: savedProfile.photoUrl || tgUser?.photo_url || 'https://i.pravatar.cc/150?img=53',
+    company: savedProfile.company || 'Growing Community',
+    role: savedProfile.role || savedProfile.customRole || 'Участник',
+    bio: savedProfile.bio || 'Предприниматель. Интересуюсь технологиями, маркетингом и развитием бизнеса.',
+    telegram: savedProfile.telegram ? `@${savedProfile.telegram}` : tgUser?.username ? `@${tgUser.username}` : '@vlad_lop',
     eventsCount: 5,
     matchesCount: 8,
   };
@@ -61,6 +66,24 @@ export const Profile: React.FC = () => {
         </div>
       </div>
 
+      {/* Profile Completion Banner */}
+      {!savedProfile.isComplete && (
+        <section className={styles.section}>
+          <div className={styles.completionBanner}>
+            <div className={styles.completionTop}>
+              <AlertCircle size={16} />
+              <span>Заполните профиль ({savedProfile.completeness}/5)</span>
+            </div>
+            <div className={styles.completionBar}>
+              <div className={styles.completionFill} style={{ width: `${(savedProfile.completeness / 5) * 100}%` }} />
+            </div>
+            <Button variant="primary" size="sm" fullWidth onClick={() => navigate('/edit-profile')} icon={<UserPlus size={15} />}>
+              {savedProfile.completeness > 0 ? 'Дозаполнить визитку' : 'Создать визитку'}
+            </Button>
+          </div>
+        </section>
+      )}
+
       {/* Business Card */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
@@ -68,45 +91,24 @@ export const Profile: React.FC = () => {
             <Briefcase size={16} />
             Визитка
           </h3>
-          <button className={styles.editBtn} onClick={() => setIsEditing(!isEditing)}>
+          <button className={styles.editBtn} onClick={() => navigate('/edit-profile')}>
             <Edit3 size={14} />
-            {isEditing ? 'Готово' : 'Изменить'}
+            Изменить
           </button>
         </div>
         <div className={styles.card}>
-          {isEditing ? (
-            <div className={styles.editForm}>
-              <div className={styles.field}>
-                <label className={styles.fieldLabel}>Компания</label>
-                <input className={styles.fieldInput} defaultValue={user.company} />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.fieldLabel}>Должность</label>
-                <input className={styles.fieldInput} defaultValue={user.role} />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.fieldLabel}>О себе</label>
-                <textarea className={styles.fieldTextarea} defaultValue={user.bio} rows={3} />
-              </div>
-              <Button variant="primary" size="sm" fullWidth onClick={() => {
-                setIsEditing(false);
-                if (isAvailable) {
-                  haptic.notification('success');
-                  sendData({ action: 'profile_update' });
-                }
-              }}>
-                Сохранить
-              </Button>
+          <p className={styles.bio}>{user.bio}</p>
+          {savedProfile.skills && savedProfile.skills.length > 0 && (
+            <div className={styles.profileSkills}>
+              {savedProfile.skills.map(s => (
+                <span key={s} className={styles.profileSkillTag}>{s}</span>
+              ))}
             </div>
-          ) : (
-            <>
-              <p className={styles.bio}>{user.bio}</p>
-              <div className={styles.contactRow}>
-                <MessageCircle size={14} />
-                <span>{user.telegram}</span>
-              </div>
-            </>
           )}
+          <div className={styles.contactRow}>
+            <MessageCircle size={14} />
+            <span>{user.telegram}</span>
+          </div>
         </div>
       </section>
 

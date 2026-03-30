@@ -9,6 +9,7 @@ import { Catalog } from './pages/Catalog/Catalog';
 import { Profile } from './pages/Profile/Profile';
 import { MemberProfile } from './pages/MemberProfile/MemberProfile';
 import { Bonuses } from './pages/Bonuses/Bonuses';
+import { EditProfile } from './pages/EditProfile/EditProfile';
 import { useTelegram } from './hooks/useTelegram';
 
 function TelegramInit() {
@@ -52,6 +53,7 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/member/:id" element={<MemberProfile />} />
           <Route path="/bonuses" element={<Bonuses />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
