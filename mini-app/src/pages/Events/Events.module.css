@@ -48,6 +48,101 @@
   color: var(--text-muted);
 }
 
+/* Sreda Banner */
+.sredaBanner {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 14px;
+  cursor: pointer;
+  height: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.sredaBanner:active {
+  transform: scale(0.98);
+  transition: transform 0.15s;
+}
+
+.sredaImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sredaOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(2,9,26,0.92) 0%, rgba(2,9,26,0.7) 60%, rgba(2,9,26,0.3) 100%);
+}
+
+.sredaContent {
+  position: relative;
+  z-index: 2;
+  padding: 14px 16px;
+  flex: 1;
+}
+
+.sredaBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-green-light);
+  color: var(--accent-green);
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sredaTitle {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sredaMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.sredaProgress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.sredaProgressBar {
+  width: 60px;
+  height: 3px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sredaProgressFill {
+  height: 100%;
+  background: var(--accent-green);
+  border-radius: 2px;
+}
+
+.sredaArrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  z-index: 2;
+}
+
 .searchInput:focus {
   border-color: var(--accent-green);
 }

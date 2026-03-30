@@ -1,0 +1,407 @@
+.page {
+  min-height: 100%;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2,9,26,0.3) 0%, rgba(2,9,26,0.6) 50%, rgba(2,9,26,1) 100%);
+}
+
+.backBtn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 5;
+}
+
+.heroContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 16px 20px;
+  z-index: 3;
+}
+
+.heroTitle {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 8px;
+  line-height: 1.15;
+}
+
+.heroSubtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Info Bar */
+.infoBar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 16px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.infoItem svg {
+  color: var(--accent-green);
+  flex-shrink: 0;
+}
+
+/* Sections */
+.section {
+  padding: 0 16px 16px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.sectionIcon {
+  color: var(--accent-green);
+}
+
+.description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 0 16px 16px;
+}
+
+/* Progress Card */
+.progressCard {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progressTitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progressCount {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--gradient-green);
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+.progressDots {
+  display: flex;
+  gap: 4px;
+  justify-content: space-between;
+}
+
+.progressDot {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-elevated);
+  transition: background 0.3s;
+}
+
+.dotDone {
+  background: var(--accent-green);
+}
+
+.dotLive {
+  background: var(--accent-orange);
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Sessions */
+.sessionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sessionCard {
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.sessionCard:active {
+  background: var(--bg-card-hover);
+}
+
+.sessionPast {
+  opacity: 0.7;
+}
+
+.sessionImgWrap {
+  position: relative;
+  height: 130px;
+  overflow: hidden;
+}
+
+.sessionImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sessionImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(2,9,26,0.8) 100%);
+}
+
+.sessionNumber {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+/* Session Content */
+.sessionContent {
+  padding: 12px 14px;
+}
+
+.sessionTop {
+  margin-bottom: 10px;
+}
+
+.sessionMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sessionDate {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sessionStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.statusDone {
+  color: var(--accent-green);
+}
+
+.statusLive {
+  color: var(--accent-orange);
+  animation: pulse 1.5s ease infinite;
+}
+
+.statusLocked {
+  color: var(--text-muted);
+}
+
+.sessionTopic {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Speaker */
+.sessionSpeaker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.speakerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.speakerName {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.speakerRole {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.expandArrow {
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.expandArrowOpen {
+  transform: rotate(90deg);
+}
+
+/* Expanded */
+.sessionExpanded {
+  padding-top: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sessionDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* CTA */
+.ctaCard {
+  padding: 24px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-green-soft);
+  border: 1px solid rgba(45, 188, 59, 0.2);
+  text-align: center;
+}
+
+.ctaPrice {
+  margin-bottom: 16px;
+}
+
+.ctaPriceLabel {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.ctaPriceValue {
+  font-size: 32px;
+  font-weight: 800;
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--accent-green);
+  letter-spacing: 0.04em;
+}
+
+.ctaHint {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* Partners */
+.partners {
+  text-align: center;
+  padding: 16px;
+}
+
+.partnersLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.partnerLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.partnerName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.partnerX {
+  font-size: 14px;
+  color: var(--text-muted);
+}

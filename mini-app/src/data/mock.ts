@@ -15,6 +15,38 @@ export interface Event {
   status: 'upcoming' | 'past';
   attendees: number;
   maxAttendees: number;
+  type?: 'single' | 'series';
+}
+
+export interface SredaSession {
+  id: string;
+  number: number;
+  date: string;
+  topic: string;
+  description: string;
+  speaker: Speaker;
+  image: string;
+  status: 'upcoming' | 'past' | 'live';
+}
+
+export interface SredaEvent {
+  id: string;
+  title: string;
+  subtitle: string;
+  dateRange: string;
+  frequency: string;
+  location: string;
+  address: string;
+  price: string;
+  description: string;
+  heroImage: string;
+  totalSessions: number;
+  completedSessions: number;
+  sessions: SredaSession[];
+  tags: string[];
+  attendees: number;
+  maxAttendees: number;
+  partners: { name: string; logo: string }[];
 }
 
 export interface Speaker {
@@ -432,6 +464,130 @@ export const people: Person[] = [
     contactsHidden: false,
   },
 ];
+
+export const sredaEvent: SredaEvent = {
+  id: 'sreda',
+  title: 'Гроуинг. Бизнес-среда',
+  subtitle: 'Формат Mini-MBA в кинопространстве',
+  dateRange: '18 марта — 20 мая 2026',
+  frequency: 'Каждую среду',
+  location: 'mooon+ cinema space',
+  address: 'ТРК Minsk City Mall, Минск',
+  price: '490 BYN',
+  description: 'Совместный проект Гроуинг и mooon+ — цикл из 10 практических встреч для предпринимателей и руководителей. Каждая сессия — глубокое погружение в ключевую бизнес-дисциплину и нетворкинг с практиками рынка. Обучение в атмосфере, вдохновляющей на большие идеи.',
+  heroImage: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&h=400&fit=crop',
+  totalSessions: 10,
+  completedSessions: 2,
+  sessions: [
+    {
+      id: 'ss1',
+      number: 1,
+      date: '18 марта',
+      topic: 'Стратегия и бизнес-модель',
+      description: 'Как построить устойчивую бизнес-модель. Анализ рынка, конкурентные преимущества, стратегическое планирование на год вперёд.',
+      speaker: { id: 'sp1', name: 'Андрей Ковалёв', role: 'Стратег', company: 'GrowthLab', avatar: 'https://i.pravatar.cc/150?img=52' },
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=300&fit=crop',
+      status: 'past',
+    },
+    {
+      id: 'ss2',
+      number: 2,
+      date: '25 марта',
+      topic: 'Финансы и управление деньгами',
+      description: 'Финансовая грамотность для руководителей: P&L, cash flow, unit-экономика, привлечение инвестиций.',
+      speaker: { id: 'sp2', name: 'Ольга Крайнова', role: 'Финансовый консультант', company: 'FinGrowth', avatar: 'https://i.pravatar.cc/150?img=32' },
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=300&fit=crop',
+      status: 'past',
+    },
+    {
+      id: 'ss3',
+      number: 3,
+      date: '1 апреля',
+      topic: 'Маркетинг и привлечение клиентов',
+      description: 'Performance-маркетинг, воронки продаж, контент-стратегия, работа с CAC и LTV.',
+      speaker: { id: 'sp3', name: 'Кирилл Сенников', role: 'Руководитель', company: 'pickme.agency', avatar: 'https://i.pravatar.cc/150?img=12' },
+      image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss4',
+      number: 4,
+      date: '8 апреля',
+      topic: 'Продажи и переговоры',
+      description: 'Техники B2B и B2C продаж, скрипты, работа с возражениями, построение отдела продаж.',
+      speaker: { id: 'sp4', name: 'Максим Дорохов', role: 'Директор по продажам', company: 'SalesForce BY', avatar: 'https://i.pravatar.cc/150?img=57' },
+      image: 'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss5',
+      number: 5,
+      date: '15 апреля',
+      topic: 'Команда и HR',
+      description: 'Найм A-players, корпоративная культура, мотивация, удержание ключевых сотрудников.',
+      speaker: { id: 'sp5', name: 'Елена Власова', role: 'HR-директор', company: 'PeopleFirst', avatar: 'https://i.pravatar.cc/150?img=9' },
+      image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss6',
+      number: 6,
+      date: '22 апреля',
+      topic: 'Digital и технологии',
+      description: 'Цифровая трансформация, AI в бизнесе, автоматизация процессов, выбор IT-решений.',
+      speaker: { id: 'sp6', name: 'Дмитрий Козлов', role: 'CEO', company: 'TechVentures', avatar: 'https://i.pravatar.cc/150?img=3' },
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss7',
+      number: 7,
+      date: '29 апреля',
+      topic: 'Операционное управление',
+      description: 'Процессы, KPI, OKR, системы управления проектами, делегирование и контроль.',
+      speaker: { id: 'sp7', name: 'Артём Волков', role: 'COO', company: 'OptiFlow', avatar: 'https://i.pravatar.cc/150?img=60' },
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss8',
+      number: 8,
+      date: '6 мая',
+      topic: 'Юридическая безопасность',
+      description: 'Защита бизнеса, интеллектуальная собственность, договоры, налоговая оптимизация.',
+      speaker: { id: 'sp8', name: 'Виктория Лебедева', role: 'Партнёр', company: 'LegalTech BY', avatar: 'https://i.pravatar.cc/150?img=44' },
+      image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss9',
+      number: 9,
+      date: '13 мая',
+      topic: 'Личный бренд и нетворкинг',
+      description: 'Построение личного бренда руководителя, публичные выступления, деловые связи.',
+      speaker: { id: 'sp9', name: 'Дарья Давыденко', role: 'Менеджер проектов', company: 'Anomalia Team', avatar: 'https://i.pravatar.cc/150?img=25' },
+      image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+    {
+      id: 'ss10',
+      number: 10,
+      date: '20 мая',
+      topic: 'Масштабирование и рост',
+      description: 'Стратегии выхода на новые рынки, франшизы, партнёрства, привлечение инвестиций для роста.',
+      speaker: { id: 'sp10', name: 'Анастасия Белочкина', role: 'Бизнес-стратег', company: 'Scale Consulting', avatar: 'https://i.pravatar.cc/150?img=1' },
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop',
+      status: 'upcoming',
+    },
+  ],
+  tags: ['Mini-MBA', 'Стратегия', 'Маркетинг', 'Финансы', 'HR', 'Продажи'],
+  attendees: 74,
+  maxAttendees: 100,
+  partners: [
+    { name: 'mooon+', logo: '' },
+    { name: 'Growing', logo: '' },
+  ],
+};
 
 export const news: NewsItem[] = [
   {

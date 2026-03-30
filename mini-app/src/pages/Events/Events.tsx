@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Calendar, ChevronRight } from 'lucide-react';
 import { EventCard } from '../../components/EventCard/EventCard';
-import { events } from '../../data/mock';
+import { events, sredaEvent } from '../../data/mock';
 import styles from './Events.module.css';
 
 type Filter = 'all' | 'upcoming' | 'past';
@@ -40,6 +40,27 @@ export const Events: React.FC = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+      </div>
+
+      {/* Sreda Banner */}
+      <div className={styles.sredaBanner} onClick={() => navigate('/sreda')}>
+        <img src={sredaEvent.heroImage} alt="" className={styles.sredaImg} />
+        <div className={styles.sredaOverlay} />
+        <div className={styles.sredaContent}>
+          <span className={styles.sredaBadge}>Mini-MBA</span>
+          <h3 className={styles.sredaTitle}>{sredaEvent.title}</h3>
+          <div className={styles.sredaMeta}>
+            <Calendar size={12} />
+            <span>{sredaEvent.dateRange}</span>
+          </div>
+          <div className={styles.sredaProgress}>
+            <div className={styles.sredaProgressBar}>
+              <div className={styles.sredaProgressFill} style={{ width: `${(sredaEvent.completedSessions / sredaEvent.totalSessions) * 100}%` }} />
+            </div>
+            <span>{sredaEvent.completedSessions}/{sredaEvent.totalSessions} сессий</span>
+          </div>
+        </div>
+        <ChevronRight size={20} className={styles.sredaArrow} />
       </div>
 
       <div className={styles.filters}>
